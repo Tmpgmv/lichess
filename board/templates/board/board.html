@@ -1,0 +1,21 @@
+{%  extends 'base.html' %}
+{% load board %}
+{% load static %}
+{% block h %}Партия:{% endblock %}
+{%   block content %}
+<table>
+{% for r in rows %}
+    <tr>
+    {% for c in columns %}
+        <td id="{{ c|letter }}{{ r }}" class="square {{ r|colour:c }}">{{ c|letter }} {{ r }}</td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/js.js' %}"></script>
+{% endblock %}

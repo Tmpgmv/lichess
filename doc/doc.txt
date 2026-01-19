@@ -1,0 +1,2 @@
+https://lichess.org/page/api-tips
+https://lichess-org.github.io/berserk/api.html

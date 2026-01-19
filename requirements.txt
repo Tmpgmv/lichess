@@ -1,0 +1,4 @@
+berserk==0.14.0
+Django==6.0.1
+django-jquery==3.1.0
+django-bootstrap5==26.1
