@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table>
+    <tr>
+        <th>Challenger</th>
+        <th>Accept</th>
+    </tr>
+    {% for challenge in challenges %}
+        <tr>
+            <td>{{ challenge.challenger }}</td>
+            <td><a href="{{ challenge.url }}">Accept</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

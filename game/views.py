@@ -1,9 +1,10 @@
 from email.policy import default
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
 from game.form import GameForm
 from general.client import ClientManager
@@ -49,3 +50,25 @@ class CreateGameView(TemplateView):
 class SendMove(View):
     def get(self, request, *args, **kwargs):
         return HttpResponse("Hello, World!")
+
+
+class ChallengeListView(TemplateView):
+    template_name = "game/incoming_challenges.html"
+    def get_context_data(self, **kwargs):
+        client = ClientManager.get_client()
+        incoming_challenges = client.challenges.get_mine().get('in')
+        challenges = [{"challenger" : item.get("challenger").get("id"), "url" : reverse("accept", kwargs = {"id":item.get("id")})} for item in incoming_challenges]
+        context = super().get_context_data(**kwargs)
+        context["challenges"] = challenges
+        return context
+
+
+
+class AcceptChallengeView(TemplateView):
+    template_name = "game/result.html"
+
+    def get(self, request, *args, **kwargs):
+        client = ClientManager.get_client()
+        client.challenges.accept(kwargs.get("id"))
+        return redirect(reverse("board"))
+

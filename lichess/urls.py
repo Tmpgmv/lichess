@@ -22,12 +22,14 @@ from board.views import BoardView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from game.views import CreateGameView
+from game.views import CreateGameView, AcceptChallengeView, ChallengeListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', BoardView.as_view(), name="board"),
     path('create-game/', CreateGameView.as_view(), name="create-game"),
     path('account-get/', AccountView.as_view(), name="account"),
+    path('accept/<slug:id>', AcceptChallengeView.as_view(), name="accept"),
+    path('incoming-challenges/', ChallengeListView.as_view(), name="incoming-challenges"),
 
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
