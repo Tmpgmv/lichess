@@ -1,5 +1,5 @@
 import berserk
-from .const import API_TOKEN
+from account.secret import API_TOKEN
 
 class ClientManager:
 
