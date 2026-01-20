@@ -3,6 +3,11 @@
 {% load static %}
 {% block h %}Партия:{% endblock %}
 {%   block content %}
+
+<p>Opponent: {{ opponent_username }} ({{ opponent_rating }})</p>
+
+
+
 <table>
 {% for r in rows %}
     <tr>
